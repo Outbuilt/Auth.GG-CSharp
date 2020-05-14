@@ -100,7 +100,7 @@ namespace AuthGG
                         Console.WriteLine($"Expiry -> {User.Expiry}");
                         Console.WriteLine($"Last Login -> {User.LastLogin}");
                         Console.WriteLine($"Register Date -> {User.RegisterDate}");
-                        Console.WriteLine($"Variable -> {Application.GrabVariable("PutVariableSecretHere")}"); // Replace put variable secret here with the secret of the variable in your panel - https://i.imgur.com/v3q2a6e.png
+                        Console.WriteLine($"Variable -> {App.GrabVariable("PutVariableSecretHere")}"); // Replace put variable secret here with the secret of the variable in your panel - https://i.imgur.com/v3q2a6e.png
                     }
                 }
             }
