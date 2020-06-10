@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -241,9 +241,9 @@ namespace Auth.GG_Winform_Example
                     }
                     Security.End();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to establish a secure SSL tunnel with the server!", Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill();
                 }
             }
@@ -287,9 +287,9 @@ namespace Auth.GG_Winform_Example
                     }))).Split("|".ToCharArray()));
                     Security.End();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to establish a secure SSL tunnel with the server!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill();
                 }
             }
@@ -409,9 +409,9 @@ namespace Auth.GG_Winform_Example
                             return false;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to establish a secure SSL tunnel with the server!", ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Security.End();
                     Process.GetCurrentProcess().Kill();
                 }
@@ -484,9 +484,9 @@ namespace Auth.GG_Winform_Example
 
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to establish a secure SSL tunnel with the server!", ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill();
                 }
                 return false;
@@ -590,9 +590,9 @@ namespace Auth.GG_Winform_Example
                             return false;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to establish a secure SSL tunnel with the server!", ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Security.End();
                     Process.GetCurrentProcess().Kill();
                 }
@@ -674,9 +674,9 @@ namespace Auth.GG_Winform_Example
                             return false;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to establish a secure SSL tunnel with the server!", ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill();
                 }
                 return false;
@@ -749,9 +749,9 @@ namespace Auth.GG_Winform_Example
                             return false;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to establish a secure SSL tunnel with the server!", ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill();
                 }
                 return false;
@@ -785,6 +785,7 @@ namespace Auth.GG_Winform_Example
         }
         public static void Start()
         {
+            string drive = Path.GetPathRoot(Environment.SystemDirectory);
             if (Constants.Started)
             {
                 MessageBox.Show("A session has already been started, please end the previous one!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -792,7 +793,7 @@ namespace Auth.GG_Winform_Example
             }
             else
             {
-                using (StreamReader sr = new StreamReader(@"C:\Windows\System32\drivers\etc\hosts"))
+                using (StreamReader sr = new StreamReader($@"{drive}Windows\System32\drivers\etc\hosts"))
                 {
                     string contents = sr.ReadToEnd();
                     if (contents.Contains("api.auth.gg"))
@@ -1004,8 +1005,9 @@ namespace Auth.GG_Winform_Example
 
         private string GetArpTable()
         {
+            string drive = Path.GetPathRoot(Environment.SystemDirectory);
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = @"C:\Windows\System32\arp.exe";
+            start.FileName = $@"{drive}Windows\System32\arp.exe";
             start.Arguments = "-a";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
