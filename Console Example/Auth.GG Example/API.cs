@@ -208,6 +208,12 @@ namespace AuthGG
                             }
                             else
                             {
+                                if (ApplicationSettings.Version != Version)
+                                {
+                                    MessageBox.Show($"Update {ApplicationSettings.Version} available, redirecting to update!", Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                                    Process.Start(ApplicationSettings.Update_Link);
+                                    Process.GetCurrentProcess().Kill();
+                                }
                                 if (response[12] == "Enabled")
                                 {
                                     if (ApplicationSettings.Hash != Security.Integrity(Process.GetCurrentProcess().MainModule.FileName))
@@ -216,13 +222,6 @@ namespace AuthGG
                                         Process.GetCurrentProcess().Kill();
                                     }
                                 }
-                                if (ApplicationSettings.Version != Version)
-                                {
-                                    MessageBox.Show($"Update {ApplicationSettings.Version} available, redirecting to update!", Name, MessageBoxButton.OK, MessageBoxImage.Error);
-                                    Process.Start(ApplicationSettings.Update_Link);
-                                    Process.GetCurrentProcess().Kill();
-                                }
-
                             }
                             if (ApplicationSettings.Status == false)
                             {
