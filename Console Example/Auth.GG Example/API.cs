@@ -847,7 +847,7 @@ namespace AuthGG
         {
             return certificate != null && certificate.GetPublicKeyString() == _key;
         }
-        private const string _key = "041B6566A801CC518B5AC35FE91FCF4BDD9E94F3AE8156DF327083B7DA8A62D5CE2A4C25245F1567A0AC51EF12C549E8D62CC27DB1398DE17F62015ADF00207D5D";
+        private const string _key = "046EECD33E469E9E1958D6BEEDE0A71843202724A5758BD1723F6C340C5E98EDE06FF5C21B35F359C65B850744729B3AA999B0B6392DA69EDB278EB31DBCE85774";
         public static string Integrity(string filename)
         {
             string result;
