@@ -836,7 +836,7 @@ namespace Auth.GG_Winform_Example
         {
             return certificate != null && certificate.GetPublicKeyString() == _key;
         }
-        private const string _key = "04D9F7C0C68DA3FDE380C3BBE2F87D09BB546B7DE5254DEAC4DC2DCA4A612A83585431E98B49A91A6D854D1128C133E92D5A6BFED12EF5043FF6AC5E77973135E6";
+        private const string _key = "045C03C7FB0E76A822AB197B6663C288D9632E55B39B80296CBCD978707A7E5B3EAE1DB5D487CE9F0E448C3557079CE142F5A41B7F1F6436077D8F3FF7C311888C";
         public static string Integrity(string filename)
         {
             string result;
