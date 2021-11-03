@@ -35,6 +35,7 @@ namespace Auth.GG_Winform_Example
             {
                 //Put code here of what you want to do after successful login
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                API.Log(User.Username, "Signed in");
                 Main main = new Main();
                 main.Show();
                 this.Hide();
