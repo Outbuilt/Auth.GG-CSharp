@@ -35,7 +35,7 @@ Now that you have your ``AID`` and ``Secret`` use it to initialize and connect y
 * ``ApplicationSettings.Freemode`` : Freemode Enabled/Disabled
 * ``ApplicationSettings.Login`` : Login Enabled/Disabled
 * ``ApplicationSettings.Register`` : Login Enabled/Disabled
-*  ``ApplicationSettings.TotalUsers`` : Total users signed up for application
+*  ``ApplicationSettings.TotalUsers`` : Total users registered for application
 ## Login
 
 ```
