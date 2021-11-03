@@ -99,6 +99,8 @@ namespace AuthGG
         public static string LastLogin { get; set; }
 
         public static string RegisterDate { get; set; }
+
+        public static string ProfilePicture { get; set; }
     }
     internal class ApplicationSettings
     {
@@ -135,9 +137,9 @@ namespace AuthGG
 
         public static void Initialize(string name, string aid, string secret, string version)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(aid) || string.IsNullOrWhiteSpace(secret) || string.IsNullOrWhiteSpace(version))
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(aid) || string.IsNullOrWhiteSpace(secret) || string.IsNullOrWhiteSpace(version) || name.Contains("APPNAME"))
             {
-                MessageBox.Show("Invalid application information!", Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Failed to initialize your application correctly in Program.cs!", Name, MessageBoxButton.OK, MessageBoxImage.Error);
                 Process.GetCurrentProcess().Kill();
             }
             AID = aid;
@@ -285,6 +287,59 @@ namespace AuthGG
                         ["type"] = Encryption.APIService("log")
                     }))).Split("|".ToCharArray()));
                     Security.End();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    Process.GetCurrentProcess().Kill();
+                }
+            }
+        }
+        public static void UploadPic(string username, string path)
+        {
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(path))
+            {
+                MessageBox.Show("Invalid Picture information!", ApplicationSettings.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                Process.GetCurrentProcess().Kill();
+            }
+            string[] response = new string[] { };
+            using (WebClient wc = new WebClient())
+            {
+
+                try
+                {
+                    wc.Proxy = null;
+                    Security.Start();
+                    response = (Encryption.DecryptService(Encoding.Default.GetString(wc.UploadValues(Constants.ApiUrl, new NameValueCollection
+                    {
+                        ["token"] = Encryption.EncryptService(Constants.Token),
+                        ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString()),
+                        ["aid"] = Encryption.APIService(OnProgramStart.AID),
+                        ["username"] = Encryption.APIService(username),
+                        ["picbytes"] = Encryption.APIService(path),
+                        ["session_id"] = Constants.IV,
+                        ["api_id"] = Constants.APIENCRYPTSALT,
+                        ["api_key"] = Constants.APIENCRYPTKEY,
+                        ["session_key"] = Constants.Key,
+                        ["secret"] = Encryption.APIService(OnProgramStart.Secret),
+                        ["type"] = Encryption.APIService("uploadpic")
+
+                    }))).Split("|".ToCharArray()));
+                    switch (response[0])
+                    {
+                        case "success":
+                            MessageBox.Show("Successfully updated profile picture!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Information);
+                            Security.End();
+                            return;
+                        case "permissions":
+                            MessageBox.Show("Please upgrade your plan to use this feature!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                            Security.End();
+                            return;
+                        case "failed":
+                            MessageBox.Show("Failed to upload profile picture!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                            Security.End();
+                            return;
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -12,9 +12,15 @@ namespace AuthGG
     {
         static void Main(string[] args)
         {
+            //Update this with your program information found in dashboard
+            //APPNAME = Name of your application
+            //AIDHERE = AID found in your settings page > Upper right corner > Settings
+            //APPSECRET = Secret in applications table
+            //1.0 = indicates your application version located in your application settings
+            //YOUTUBE TUTORIAL | https://www.youtube.com/watch?v=VjPz21Va9wU
 
             //This connects your file to the Auth.GG API, and sends back your application settings and such
-            OnProgramStart.Initialize("APPNAME", "AID", "PROGRAMSECRET", "VERSION");
+            OnProgramStart.Initialize("APPNAME", "AIDHERE", "APPSECRET", "1.0");
             if(ApplicationSettings.Freemode)
             {
                 //Usually when your application doesn't need a login and has freemode enabled you put the code here you want to do
