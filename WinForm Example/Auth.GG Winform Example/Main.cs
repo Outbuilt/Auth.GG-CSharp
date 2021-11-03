@@ -61,8 +61,8 @@ namespace Auth.GG_Winform_Example
 
         private void siticoneRoundedButton1_Click_1(object sender, EventArgs e)
         {
-             OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "Image Files(*.jpg; *.png; *.jpeg; *.gif; *.bmp; *.txt)|*.jpg; *.png; *.jpeg; *.gif; *.bmp; *.txt";
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Image Files(*.jpg; *.png; *.jpeg; *.gif; *.bmp)|*.jpg; *.png; *.jpeg; *.gif; *.bmp)";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 string profilepic = open.FileName;
