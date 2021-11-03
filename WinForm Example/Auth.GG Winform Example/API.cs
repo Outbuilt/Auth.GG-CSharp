@@ -121,6 +121,8 @@ namespace Auth.GG_Winform_Example
         public static string Name { get; set; }
 
         public static bool Register { get; set; }
+        
+        public static string TotalUsers { get; set; }
     }
 
     internal class OnProgramStart
@@ -200,6 +202,7 @@ namespace Auth.GG_Winform_Example
                             ApplicationSettings.Name = response[10];
                             if (response[11] == "Enabled")
                                 ApplicationSettings.Register = true;
+                            ApplicationSettings.TotalUsers = response[13];
                             if (ApplicationSettings.DeveloperMode)
                             {
                                 MessageBox.Show("Application is in Developer Mode, bypassing integrity and update check!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
