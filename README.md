@@ -35,6 +35,7 @@ Now that you have your ``AID`` and ``Secret`` use it to initialize and connect y
 * ``ApplicationSettings.Freemode`` : Freemode Enabled/Disabled
 * ``ApplicationSettings.Login`` : Login Enabled/Disabled
 * ``ApplicationSettings.Register`` : Login Enabled/Disabled
+*  ``ApplicationSettings.TotalUsers`` : Total users signed up for application
 ## Login
 
 ```
@@ -55,6 +56,7 @@ MessageBox.Show("You have successfully logged in!", OnProgramStart.Name, Message
 * ``User.Expiry`` : Users expiry
 * ``User.LastLogin`` : Users last login
 * ``User.RegisterDate`` : Users registration date
+* ``User.ProfilePicture`` : Users profile picture link
 ## Register
 
 ```
@@ -86,4 +88,14 @@ MessageBox.Show("You have successfully registered!", OnProgramStart.Name, Messag
                     MessageBox.Show("Your key does not exist!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill(); // closes the application
                 }
+```
+## Log Action
+
+```
+ API.Log("USERNAMEHERE", "ACTION HERE");
+```
+## Update Profile Picture
+
+```
+ API.UploadPic("USERNAMEHERE", @"C:\imagelocation.png");
 ```
