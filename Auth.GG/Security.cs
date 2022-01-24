@@ -9,7 +9,7 @@ internal class Security
         var drive = Path.GetPathRoot(Environment.SystemDirectory);
         if (Constants.Started)
         {
-            Utility.MsgShowWarning("A session has already been started, please end the previous one!", AuthGG.Name);
+            Utility.MsgShowWarning("A session has already been started, please end the previous one!", AuthGG.AppAppName);
             Process.GetCurrentProcess().Kill();
         }
         else
@@ -20,7 +20,7 @@ internal class Security
                 if (contents.Contains("api.auth.gg"))
                 {
                     Constants.Breached = true;
-                    Utility.MsgShowError("DNS redirecting has been detected!", AuthGG.Name);
+                    Utility.MsgShowError("DNS redirecting has been detected!", AuthGG.AppAppName);
                     Process.GetCurrentProcess().Kill();
                 }
             }
@@ -52,7 +52,7 @@ internal class Security
     {
         if (!Constants.Started)
         {
-            Utility.MsgShowWarning("No session has been started, closing for security reasons!", AuthGG.Name);
+            Utility.MsgShowWarning("No session has been started, closing for security reasons!", AuthGG.AppAppName);
             Process.GetCurrentProcess().Kill();
         }
         else

@@ -1,6 +1,6 @@
 ﻿namespace Auth.GG;
 
-internal class App
+public class App
 {
     public static Dictionary<string, string> Variables = new Dictionary<string, string>();
 
@@ -47,7 +47,7 @@ internal class App
         }
         catch (Exception ex)
         {
-            Utility.MsgShowError(ex.Message, AuthGG.Name);
+            Utility.MsgShowError(ex.Message, AuthGG.AppName);
             Process.GetCurrentProcess().Kill();
         }
     }

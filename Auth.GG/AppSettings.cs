@@ -1,5 +1,27 @@
 ﻿namespace Auth.GG;
 
+public class ApplicationSettings
+{
+    public static bool Status => AppSettings.Status;
+
+    public static bool DeveloperMode => AppSettings.DeveloperMode;
+
+    public static string Hash => AppSettings.Hash;
+
+    public static string Version => AppSettings.Version;
+
+    public static string UpdateLink => AppSettings.UpdateLink;
+
+    public static bool FreeMode => AppSettings.FreeMode;
+
+    public static bool Login => AppSettings.Login;
+
+    public static string Name => AppSettings.Name;
+
+    public static bool Register => AppSettings.Register;
+
+    public static string TotalUsers => AppSettings.TotalUsers;
+}
 internal class AppSettings
 {
     internal static bool Status { get; set; }
@@ -10,7 +32,7 @@ internal class AppSettings
 
     internal static string Version { get; set; }
 
-    internal static string Update_Link { get; set; }
+    internal static string UpdateLink { get; set; }
 
     internal static bool FreeMode { get; set; }
 

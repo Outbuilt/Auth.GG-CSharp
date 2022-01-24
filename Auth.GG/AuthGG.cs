@@ -1,9 +1,6 @@
 ﻿global using System;
-global using System.Collections.Generic;
 global using System.Collections.Specialized;
 global using System.Diagnostics;
-global using System.IO;
-global using System.Linq;
 global using System.Net;
 global using System.Net.NetworkInformation;
 global using System.Net.Security;
@@ -12,16 +9,16 @@ global using System.Security.Cryptography.X509Certificates;
 global using System.Security.Principal;
 global using System.Text;
 global using System.Text.RegularExpressions;
-global using System.Threading;
-global using System.Windows;
-using System.Globalization;
-using System.Xml;
+global using System.Globalization;
 
 namespace Auth.GG;
 
 public class AuthGG
 {
-    internal static string Name { get; set; }
+    public string Name => AppName;
+
+
+    internal static string AppName { get; set; }
     internal static string AID { get; set; }
     internal static string Secret { get; set; }
     internal static string Version { get; set; }
@@ -30,16 +27,16 @@ public class AuthGG
     {
 
     }
-    public AuthGG(string name, string aid, string secret, string version, bool isConsole = false)
+    public AuthGG(string appName, string aid, string secret, string version, bool isConsole = false)
     {
-        if (Utility.IsEmpty(new List<string> { name, aid, secret, version }))
+        if (Utility.IsEmpty(new List<string> { appName, aid, secret, version }))
         {
-            Utility.MsgShowError("Failed to initialize your application correctly in Program.cs!", Name);
+            Utility.MsgShowError("Failed to initialize your application correctly in Program.cs!", AppName);
             Process.GetCurrentProcess().Kill();
             return;
         }
 
-        Name = name;
+        AppName = appName;
         AID = aid;
         Secret = secret;
         Version = version;
@@ -70,19 +67,19 @@ public class AuthGG
 
             if (Security.MaliciousCheck(response[1]))
             {
-                Utility.MsgShowWarning("Possible malicious activity detected!", Name);
+                Utility.MsgShowWarning("Possible malicious activity detected!", AppName);
                 Process.GetCurrentProcess().Kill();
             }
 
             if (Constants.Breached)
             {
-                Utility.MsgShowWarning("Possible malicious activity detected!", Name);
+                Utility.MsgShowWarning("Possible malicious activity detected!", AppName);
                 Process.GetCurrentProcess().Kill();
             }
 
             if (response[0] != Constants.Token)
             {
-                Utility.MsgShowError("Security error has been triggered!", Name);
+                Utility.MsgShowError("Security error has been triggered!", AppName);
                 Process.GetCurrentProcess().Kill();
             }
 
@@ -96,7 +93,7 @@ public class AuthGG
                         AppSettings.DeveloperMode = true;
                     AppSettings.Hash = response[5];
                     AppSettings.Version = response[6];
-                    AppSettings.Update_Link = response[7];
+                    AppSettings.UpdateLink = response[7];
                     if (response[8] == "Enabled")
                         AppSettings.FreeMode = true;
                     if (response[9] == "Enabled")
@@ -107,7 +104,7 @@ public class AuthGG
                     AppSettings.TotalUsers = response[13];
                     if (AppSettings.DeveloperMode)
                     {
-                        Utility.MsgShowWarning("Application is in Developer Mode, bypassing integrity and update check!", Name);
+                        Utility.MsgShowWarning("Application is in Developer Mode, bypassing integrity and update check!", AppName);
                         File.Create(Environment.CurrentDirectory + "/integrity.log").Close();
                         var processModule = Process.GetCurrentProcess().MainModule;
                         if (processModule is { FileName: { } })
@@ -116,14 +113,14 @@ public class AuthGG
                             File.WriteAllText(Environment.CurrentDirectory + "/integrity.log", hash);
                         }
 
-                        Utility.MsgShowInfo("Your applications hash has been saved to integrity.txt, please refer to this when your application is ready for release!", Name);
+                        Utility.MsgShowInfo("Your applications hash has been saved to integrity.txt, please refer to this when your application is ready for release!", AppName);
                     }
                     else
                     {
                         if (AppSettings.Version != Version)
                         {
-                            Utility.MsgShowError($"Update {AppSettings.Version} available, redirecting to update!", Name);
-                            Process.Start(AppSettings.Update_Link);
+                            Utility.MsgShowError($"Update {AppSettings.Version} available, redirecting to update!", AppName);
+                            Process.Start(AppSettings.UpdateLink);
                             Process.GetCurrentProcess().Kill();
                         }
 
@@ -134,7 +131,7 @@ public class AuthGG
                             {
                                 if (AppSettings.Hash != Security.Integrity(processModule.FileName))
                                 {
-                                    Utility.MsgShowError($"File has been tampered with, couldn't verify integrity!", Name);
+                                    Utility.MsgShowError($"File has been tampered with, couldn't verify integrity!", AppName);
                                     Process.GetCurrentProcess().Kill();
                                 }
                             }
@@ -143,20 +140,20 @@ public class AuthGG
 
                     if (AppSettings.Status == false)
                     {
-                        Utility.MsgShowError("Looks like this application is disabled, please try again later!", Name);
+                        Utility.MsgShowError("Looks like this application is disabled, please try again later!", AppName);
                         Process.GetCurrentProcess().Kill();
                     }
 
                     break;
 
                 case "binderror":
-                    Utility.MsgShowError(Encryption.Decode("RmFpbGVkIHRvIGJpbmQgdG8gc2VydmVyLCBjaGVjayB5b3VyIEFJRCAmIFNlY3JldCBpbiB5b3VyIGNvZGUh"), Name);
+                    Utility.MsgShowError(Encryption.Decode("RmFpbGVkIHRvIGJpbmQgdG8gc2VydmVyLCBjaGVjayB5b3VyIEFJRCAmIFNlY3JldCBpbiB5b3VyIGNvZGUh"), AppName);
                     Process.GetCurrentProcess().Kill();
                     return;
 
                 case "banned":
                     Utility.MsgShowError("This application has been banned for violating the TOS" + Environment.NewLine +
-                                         "Contact us at support@auth.gg", Name);
+                                         "Contact us at support@auth.gg", AppName);
                     Process.GetCurrentProcess().Kill();
                     return;
             }
@@ -165,10 +162,9 @@ public class AuthGG
         }
         catch (Exception ex)
         {
-            Utility.MsgShowError(ex.Message, Name);
+            Utility.MsgShowError(ex.Message, AppName);
             Process.GetCurrentProcess().Kill();
         }
     }
-
 
 }

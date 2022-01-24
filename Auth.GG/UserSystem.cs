@@ -1,9 +1,6 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using System.Globalization;
+﻿namespace Auth.GG;
 
-namespace Auth.GG;
-
-internal class UserSystem
+public class UserSystem
 {
     public static bool AIO(string AIO)
     {
@@ -84,17 +81,17 @@ internal class UserSystem
     {
         if (response[0] != Constants.Token)
         {
-            Utility.MsgShowError("Security error has been triggered!", AuthGG.Name);
+            Utility.MsgShowError("Security error has been triggered!", AuthGG.AppName);
             Process.GetCurrentProcess().Kill();
         }
         if (Security.MaliciousCheck(response[1]))
         {
-            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.Name);
+            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.AppName);
             Process.GetCurrentProcess().Kill();
         }
         if (Constants.Breached)
         {
-            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.Name);
+            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.AppName);
             Process.GetCurrentProcess().Kill();
         }
         switch (response[2])
@@ -232,18 +229,18 @@ internal class UserSystem
     {
         if (response[0] != Constants.Token)
         {
-            Utility.MsgShowError("Security error has been triggered!", AuthGG.Name);
+            Utility.MsgShowError("Security error has been triggered!", AuthGG.AppName);
             Security.End();
             Process.GetCurrentProcess().Kill();
         }
         if (Security.MaliciousCheck(response[1]))
         {
-            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.Name);
+            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.AppName);
             Process.GetCurrentProcess().Kill();
         }
         if (Constants.Breached)
         {
-            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.Name);
+            Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.AppName);
             Process.GetCurrentProcess().Kill();
         }
         Security.End();
@@ -304,18 +301,18 @@ internal class UserSystem
             }))).Split("|".ToCharArray());
             if (response[0] != Constants.Token)
             {
-                Utility.MsgShowError("Security error has been triggered!", AuthGG.Name);
+                Utility.MsgShowError("Security error has been triggered!", AuthGG.AppName);
                 Security.End();
                 Process.GetCurrentProcess().Kill();
             }
             if (Security.MaliciousCheck(response[1]))
             {
-                Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.Name);
+                Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.AppName);
                 Process.GetCurrentProcess().Kill();
             }
             if (Constants.Breached)
             {
-                Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.Name);
+                Utility.MsgShowWarning("Possible malicious activity detected!", AuthGG.AppName);
                 Process.GetCurrentProcess().Kill();
             }
             switch (response[2])
@@ -370,23 +367,23 @@ internal class UserSystem
             switch (response[0])
             {
                 case "success":
-                    Utility.MsgShowInfo("Successfully updated profile picture!", AuthGG.Name);
+                    Utility.MsgShowInfo("Successfully updated profile picture!", AuthGG.AppName);
                     Security.End();
                     return;
 
                 case "permissions":
-                    Utility.MsgShowError("Please upgrade your plan to use this feature!", AuthGG.Name);
+                    Utility.MsgShowError("Please upgrade your plan to use this feature!", AuthGG.AppName);
                     Security.End();
                     return;
 
                 case "maxsize":
                     if (AuthGG.IsConsole) return;
-                    Utility.MsgShowError("Image cannot be greater than 1 MB!", AuthGG.Name);
+                    Utility.MsgShowError("Image cannot be greater than 1 MB!", AuthGG.AppName);
                     Security.End();
                     return;
 
                 case "failed":
-                    Utility.MsgShowError("Failed to upload profile picture!", AuthGG.Name);
+                    Utility.MsgShowError("Failed to upload profile picture!", AuthGG.AppName);
                     Security.End();
                     return;
             }
