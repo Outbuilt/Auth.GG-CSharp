@@ -31,10 +31,10 @@ namespace Auth.GG_Winform_Example
 
         private void siticoneRoundedButton2_Click(object sender, EventArgs e)
         {
-            if (API.Register(username.Text, password.Text,email.Text,license.Text))
+            if (UserSystem.Register(username.Text, password.Text, email.Text, license.Text))
             {
                 //Put code here of what you want to do after successful login
-                MessageBox.Show("Register has been successful!","Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Register has been successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

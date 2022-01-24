@@ -67,7 +67,7 @@ namespace Auth.GG_Winform_Example
             {
                 string profilepic = open.FileName;
                 string pic = Convert.ToBase64String(File.ReadAllBytes(profilepic));
-                API.UploadPic(User.Username, pic);
+                UserSystem.UploadPic(User.Username, pic);
             }
         }
 

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿global using Auth.GG;
+using System;
 using System.Windows.Forms;
 
 namespace Auth.GG_Winform_Example
 {
     static class Program
     {
+        internal static AuthGG AuthGG;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -21,7 +20,7 @@ namespace Auth.GG_Winform_Example
             //1.0 indicates your application version located in your application settings
             //YOUTUBE TUTORIAL | https://www.youtube.com/watch?v=VjPz21Va9wU
 
-            OnProgramStart.Initialize("APPNAME", "AIDHERE", "APPSECRET", "1.0");
+            AuthGG = new AuthGG("APPNAME", "AIDHERE", "APPSECRET", "1.0");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());

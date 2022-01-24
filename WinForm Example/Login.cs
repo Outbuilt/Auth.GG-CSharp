@@ -31,11 +31,11 @@ namespace Auth.GG_Winform_Example
 
         private void siticoneRoundedButton1_Click(object sender, EventArgs e)
         {
-            if(API.Login(username.Text,password.Text))
+            if (UserSystem.Login(username.Text, password.Text))
             {
                 //Put code here of what you want to do after successful login
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                API.Log(User.Username, "Signed in");
+                App.Log(User.Username, "Signed in");
                 Main main = new Main();
                 main.Show();
                 this.Hide();
