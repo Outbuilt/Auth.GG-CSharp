@@ -1,6 +1,6 @@
 ﻿namespace Auth.GG_Winform_Example
 {
-    public partial class Main : global::System.Windows.Forms.Form
+    public partial class FrmMain : global::System.Windows.Forms.Form
     {
         protected override void Dispose(bool disposing)
         {
@@ -15,7 +15,7 @@
         {
             this.components = new System.ComponentModel.Container();
             Siticone.UI.AnimatorNS.Animation animation16 = new Siticone.UI.AnimatorNS.Animation();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.siticoneDragControl1 = new Siticone.UI.WinForms.SiticoneDragControl(this.components);
             this.siticoneControlBox1 = new Siticone.UI.WinForms.SiticoneControlBox();
             this.siticoneControlBox2 = new Siticone.UI.WinForms.SiticoneControlBox();
@@ -223,7 +223,6 @@
             this.hwid.Size = new System.Drawing.Size(69, 14);
             this.hwid.TabIndex = 40;
             this.hwid.Text = "siticoneLabel4";
-            this.hwid.Click += new System.EventHandler(this.hwid_Click);
             // 
             // uservariable
             // 
@@ -331,7 +330,6 @@
             this.welcome.Size = new System.Drawing.Size(103, 22);
             this.welcome.TabIndex = 49;
             this.welcome.Text = "siticoneLabel1";
-            this.welcome.Click += new System.EventHandler(this.welcome_Click);
             // 
             // siticoneRoundedButton1
             // 

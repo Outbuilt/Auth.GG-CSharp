@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Auth.GG_Winform_Example
 {
-    public partial class Main : Form
+    public partial class FrmMain : Form
     {
-        public Main()
+        public FrmMain()
         {
             InitializeComponent();
-        }
-
-        private void siticoneRoundedButton1_Click(object sender, EventArgs e)
-        {
         }
 
         private void siticoneControlBox1_Click(object sender, EventArgs e)
@@ -49,16 +38,6 @@ namespace Auth.GG_Winform_Example
             registerdate.Text = "Register Date: " + User.RegisterDate;
         }
 
-        private void hwid_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void welcome_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void siticoneRoundedButton1_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -69,11 +48,6 @@ namespace Auth.GG_Winform_Example
                 string pic = Convert.ToBase64String(File.ReadAllBytes(profilepic));
                 UserSystem.UploadPic(User.Username, pic);
             }
-        }
-
-        private void siticonePictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

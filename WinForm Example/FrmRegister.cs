@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Auth.GG_Winform_Example
 {
-    public partial class Register : Form
+    public partial class FrmRegister : Form
     {
-        public Register()
+        public FrmRegister()
         {
             InitializeComponent();
         }
@@ -20,7 +13,7 @@ namespace Auth.GG_Winform_Example
         private void siticoneRoundedButton1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Login f1 = new Login();
+            FrmLogin f1 = new FrmLogin();
             f1.Show();
         }
 

@@ -1,26 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Auth.GG_Winform_Example
 {
-    public partial class Login : Form
+    public partial class FrmLogin : Form
     {
-        public Login()
+        public FrmLogin()
         {
             InitializeComponent();
         }
 
         private void siticoneRoundedButton2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Register f2 = new Register();
+            Hide();
+            FrmRegister f2 = new FrmRegister();
             f2.Show();
         }
 
@@ -36,14 +29,10 @@ namespace Auth.GG_Winform_Example
                 //Put code here of what you want to do after successful login
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 App.Log(User.Username, "Signed in");
-                Main main = new Main();
+                FrmMain main = new FrmMain();
                 main.Show();
-                this.Hide();
+                Hide();
             }
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
         }
     }
 }
