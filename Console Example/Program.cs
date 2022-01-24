@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-
-namespace AuthGG
+using Auth.GG;
+namespace Console_Example
 {
     class Program
     {
+        internal static AuthGG AuthGG;
         static void Main(string[] args)
         {
             //Update this with your program information found in dashboard
@@ -20,16 +17,16 @@ namespace AuthGG
             //YOUTUBE TUTORIAL | https://www.youtube.com/watch?v=VjPz21Va9wU
 
             //This connects your file to the Auth.GG API, and sends back your application settings and such
-            OnProgramStart.Initialize("APPNAME", "AIDHERE", "APPSECRET", "1.0");
-            if(ApplicationSettings.Freemode)
+            AuthGG = new AuthGG("APPNAME", "AIDHERE", "APPSECRET", "1.0");
+            if (ApplicationSettings.FreeMode)
             {
                 //Usually when your application doesn't need a login and has freemode enabled you put the code here you want to do
-                MessageBox.Show("Freemode is active, bypassing login!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Freemode is active, bypassing login!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             if (!ApplicationSettings.Status)
             {
                 //If application is disabled in your web-panel settings this action will occur
-                MessageBox.Show("Application is disabled!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Application is disabled!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                 Process.GetCurrentProcess().Kill(); // closes the application
             }
             PrintLogo();
@@ -43,7 +40,7 @@ namespace AuthGG
                 if (!ApplicationSettings.Register)
                 {
                     //Register is disabled in application settings, will show a messagebox that it is not enabled
-                    MessageBox.Show("Register is not enabled, please try again later!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Register is not enabled, please try again later!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill(); //closes the application
                 }
                 else
@@ -59,19 +56,19 @@ namespace AuthGG
                     string email = Console.ReadLine();
                     Console.WriteLine("License:");
                     string license = Console.ReadLine();
-                    if (API.Register(username, password, email, license))
+                    if (UserSystem.Register(username, password, email, license))
                     {
-                        MessageBox.Show("You have successfully registered!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("You have successfully registered!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Information);
                         // Do code of what you want after successful register here!
                     }
                 }
             }
-            else if(option == "2")
+            else if (option == "2")
             {
                 if (!ApplicationSettings.Login)
                 {
                     //Register is disabled in application settings, will show a messagebox that it is not enabled
-                    MessageBox.Show("Login is not enabled, please try again later!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Login is not enabled, please try again later!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill(); //closes the application
                 }
                 else
@@ -83,14 +80,14 @@ namespace AuthGG
                     string username = Console.ReadLine();
                     Console.WriteLine("Password:");
                     string password = Console.ReadLine();
-                    if (API.Login(username, password))
+                    if (UserSystem.Login(username, password))
                     {
-                        MessageBox.Show("You have successfully logged in!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("You have successfully logged in!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Information);
                         Console.Clear();
                         PrintLogo();
                         // Success login stuff goes here
                         Console.ForegroundColor = ConsoleColor.White;
-                        API.Log(username, "Logged in!"); //Logs this action to your web-panel, you can do this anywhere and for anything!
+                        App.Log(username, "Logged in!"); //Logs this action to your web-panel, you can do this anywhere and for anything!
                         Console.WriteLine("***************************************************");
                         Console.WriteLine("All user information:");
                         Console.WriteLine("***************************************************");
@@ -121,9 +118,9 @@ namespace AuthGG
                 string password = Console.ReadLine();
                 Console.WriteLine("Token:");
                 string token = Console.ReadLine();
-                if (API.ExtendSubscription(username, password, token))
+                if (UserSystem.ExtendSubscription(username, password, token))
                 {
-                    MessageBox.Show("You have successfully extended your subscription!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("You have successfully extended your subscription!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Information);
                     // Do code of what you want after successful extend here!
                 }
             }
@@ -134,16 +131,16 @@ namespace AuthGG
                 Console.WriteLine();
                 Console.WriteLine("AIO Key:");
                 string KEY = Console.ReadLine();
-                if(API.AIO(KEY))
+                if (UserSystem.AIO(KEY))
                 {
                     //Code you want to do here on successful login
-                    MessageBox.Show("Welcome back to my application!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Welcome back to my application!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Information);
                     Process.GetCurrentProcess().Kill(); // closes the application
                 }
                 else
                 {
                     //Code you want to do here on failed login
-                    MessageBox.Show("Your key does not exist!", OnProgramStart.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Your key does not exist!", AuthGG.Name, MessageBoxButton.OK, MessageBoxImage.Error);
                     Process.GetCurrentProcess().Kill(); // closes the application
                 }
             }
