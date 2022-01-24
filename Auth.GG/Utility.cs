@@ -5,7 +5,7 @@ public static class Utility
     internal static void IsInitialized(bool end = false)
     {
         if (Constants.Initialized) return;
-        MsgShowError("Please initialize your application first!", AuthGG.AppAppName);
+        MsgShowError("Please initialize your application first!", AuthGG.AppName);
         if (end)
             Security.End();
         Process.GetCurrentProcess().Kill();

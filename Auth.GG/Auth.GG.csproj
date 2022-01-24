@@ -8,4 +8,8 @@
 		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+
 </Project>

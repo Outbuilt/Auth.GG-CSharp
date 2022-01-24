@@ -23,7 +23,7 @@ internal class InfoManager
         if (GetGatewayMAC() != _lastGateway)
         {
             Constants.Breached = true;
-            Utility.MsgShowError("ARP Cache poisoning has been detected!", AuthGG.AppAppName);
+            Utility.MsgShowError("ARP Cache poisoning has been detected!", AuthGG.AppName);
             Process.GetCurrentProcess().Kill();
         }
         else
