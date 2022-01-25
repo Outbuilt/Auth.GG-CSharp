@@ -54,7 +54,7 @@ public class AuthGG
                 new NameValueCollection
                 {
                     ["token"] = Encryption.EncryptService(Constants.Token),
-                    ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.InvariantCulture)),
+                    ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.CurrentCulture)),
                     ["aid"] = Encryption.APIService(AID),
                     ["session_id"] = Constants.IV,
                     ["api_id"] = Constants.APIENCRYPTSALT,

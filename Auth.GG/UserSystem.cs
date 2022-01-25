@@ -54,7 +54,7 @@ public class UserSystem
             var response = Encryption.DecryptService(Encoding.Default.GetString(wc.UploadValues(Constants.ApiUrl, new NameValueCollection
             {
                 ["token"] = Encryption.EncryptService(Constants.Token),
-                ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.InvariantCulture)),
+                ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.CurrentCulture)),
                 ["aid"] = Encryption.APIService(AuthGG.AID),
                 ["session_id"] = Constants.IV,
                 ["api_id"] = Constants.APIENCRYPTSALT,
@@ -201,7 +201,7 @@ public class UserSystem
             var response = Encryption.DecryptService(Encoding.Default.GetString(wc.UploadValues(Constants.ApiUrl, new NameValueCollection
             {
                 ["token"] = Encryption.EncryptService(Constants.Token),
-                ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.InvariantCulture)),
+                ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.CurrentCulture)),
                 ["aid"] = Encryption.APIService(AuthGG.AID),
                 ["session_id"] = Constants.IV,
                 ["api_id"] = Constants.APIENCRYPTSALT,
@@ -287,7 +287,7 @@ public class UserSystem
             var response = Encryption.DecryptService(Encoding.Default.GetString(wc.UploadValues(Constants.ApiUrl, new NameValueCollection
             {
                 ["token"] = Encryption.EncryptService(Constants.Token),
-                ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.InvariantCulture)),
+                ["timestamp"] = Encryption.EncryptService(DateTime.Now.ToString(CultureInfo.CurrentCulture)),
                 ["aid"] = Encryption.APIService(AuthGG.AID),
                 ["session_id"] = Constants.IV,
                 ["api_id"] = Constants.APIENCRYPTSALT,
